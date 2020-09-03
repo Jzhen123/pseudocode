@@ -9,10 +9,12 @@ the ensweaterator is a solar-powered autonomous vehicle that performs the follow
 * carries drone-enabled knitting tools
     * needle bed
     * yarn carriage
-* uses computer vision to identify people who are cold
-    * uses AI trained on online databases of pictures of warm people and cold people
+* identifies people who are cold
+    * uses thermal imaging (:copyright: Austin)
 * knits sweaters directly onto the bodies of the cold people it has identified
-    * uses AI trained on open-source pictures of bodies (probably human) to identify body parts
+    * plays looping warning message
+        * "WARNING! YOU ARE BEING ENSWEATERATED! PLEASE HOLD YOUR ARMS STRAIGHT OUT AND STAND PERFECTLY STILL!
+    * runs AI trained on open-source pictures of bodies (mostly human, i think) to identify body parts
 
 ## ensweaterator program
 ```
@@ -26,7 +28,7 @@ vehicle
     find-cold-person
     play-warning-message
     eject(knit-drone)
-    load(knit-drone)
+    pack-up(knit-drone)
 
 cold-person
     stand-still-with-arms-out
@@ -102,21 +104,21 @@ WHILE cold-person
         knit-drone.bind-off
         knit-drone.cut-yarn
         knit-drone.disassemble-needle-band
-    vehicle.load(knit-drone)
+    vehicle.pack-up(knit-drone)
     cold-person := warm-person
 
 EXCEPT
     IF
         yarn.run-out
     THEN
-        vehicle.load(knit-drone)
+        vehicle.pack-up(knit-drone)
         vehicle.sleep
     ELSE IF
         NOT cold-person.stand-still-with-arms-out
     THEN
         knit-drone.cut-yarn
         knit-drone.disassemble-needle-band
-        vehicle.load(knit-drone)
+        vehicle.pack-up(knit-drone)
         vehicle.wander
         vehicle.find-cold-person
 
