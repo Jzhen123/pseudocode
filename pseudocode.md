@@ -13,7 +13,7 @@ the ensweaterator is a solar-powered autonomous vehicle that performs the follow
 * knits sweaters directly onto the bodies of the cold people it has identified
     * plays looping warning message
         * "WARNING! YOU ARE BEING ENSWEATERATED! HOLD YOUR ARMS OUT STRAIGHT AND STAND PERFECTLY STILL!"
-    * runs AI trained on open-source pictures of bodies (mostly human, i think) to identify body parts
+    * runs AI trained on open-source database of body part pictures (mostly human, i think) to identify body parts
 
 ## ensweaterator program
 ```
@@ -111,7 +111,7 @@ WHILE cold-person
         knit-drone.pick-up-stitches(cold-person#shoulder-SIDE#location)
         WHILE knit-drone#needle-band#location != cold-person#wrist-SIDE#location
             knit-drone.knit-around(cold-person#wrist-SIDE#location)
-        knit-drone.bind-off
+        knit-drone.bind-off()
         knit-drone.cut-yarn()
         knit-drone.disassemble-needle-band()
     vehicle.pack-up(knit-drone)
@@ -131,8 +131,9 @@ EXCEPT
         knit-drone.cut-yarn()
         knit-drone.disassemble-needle-band()
         vehicle.pack-up(knit-drone)
-        vehicle.wander()
-        vehicle.find-cold-person(visual-input)
+        WHILE NOT cold-person
+            vehicle.wander()
+            vehicle.find-cold-person(visual-input)
 
 END
 ```
